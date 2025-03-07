@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苟不自强 奚以图存</title>
+    <style>
+        body {
+            font-family: "微软雅黑", Arial, sans-serif;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .video-block {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 30px 0;
+            padding: 20px;
+        }
+
+        .video-intro {
+            margin-bottom: 15px;
+            padding: 0 10px;
+        }
+
+        .video-intro h2 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.4em;
+        }
+
+        .video-intro p {
+            color: #7f8c8d;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        .video-container {
+            background-color: #000;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #34495e;
+            margin: 30px 0;
+            font-size: 2.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>视频节目列表</h1>
+    <!-- 第一个视频 -->
+    <div class="video-block">
+        <div class="video-intro">
+            <h2>简单爱</h2>
+            <p>出自周杰伦2002年the one演唱会，个人认为是最好听的版本</p >
+        </div>
+        <div class="video-container">
+            <video controls poster="2.jpg">
+                <source src="2.mp4" type="video/mp4">
+                <source src="2.webm" type="video/webm">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+    </div>
+    <!-- 第二个视频 -->
+    <div class="video-block">
+        <div class="video-intro">
+            <h2>新年快乐</h2>
+            <p>这是2023级22班2025年的新年贺词</p >
+        </div>
+        <div class="video-container">
+            <video controls>
+                <source src="3.mp4" type="video/mp4">
+                <source src="3.webm" type="video/webm">
+                您的浏览器不支持视频播放
+            </video>
+        </div>
+    </div>
+    
+
+    <p style="text-align: center; color: #95a5a6; margin-top: 40px;">
+        技术支持：HTML5视频播放 | 建议使用Chrome/Firefox浏览器
+    </p >
+</body>
+</html>
