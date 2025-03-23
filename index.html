@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐播放器</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,22 +15,268 @@
             align-items: center;
             height: 100vh;
         }
-        .container {
-            text-align: center;
-            background-color: #6d3f3f;
+        .player-container {
+            background-color: #00ffee;
+            color: white;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
         }
-        h1 {
-            color: #333;
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .controls button:hover {
+            background-color: #555;
+        }
+        .playlist {
+            margin-top: 20px;
+            display: none; /* 默认隐藏播放列表 */
+        }
+        .playlist ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .playlist li {
+            background-color: #00ffff;
+            color: white;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .playlist li:hover {
+            background-color: #555;
+        }
+        .toggle-playlist {
+            margin-top: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-playlist:hover {
+            background-color: #0161fb;
+        }
+        .exit-playlist {
+            margin-top: 10px;
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .exit-playlist:hover {
+            background-color: #555;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>你好</h1>
-        <p>欢迎来到我的网站！</p>
+    <div class="player-container">
+        <h1>音乐播放器</h1>
+        <audio id="audioPlayer" controls>
+            <source src="music/简单爱 - 周杰伦.mp3" type="audio/mpeg">
+            您的浏览器不支持 audio 元素。
+        </audio>
+        <div class="controls">
+            <button id="playBtn">播放</button>
+            <button id="pauseBtn">暂停</button>
+            <button id="nextBtn">下一首</button>
+        </div>
+        <button class="toggle-playlist" id="togglePlaylistBtn">显示播放列表</button>
+        <div class="playlist" id="playlist">
+            <button class="exit-playlist" id="exitPlaylistBtn">退出</button>
+            <ul>
+                <li data-src="music/简单爱 - 周杰伦.mp3">简单爱 - 周杰伦</li>
+                <li data-src="music/手写的从前 - 周杰伦.mp3">手写的从前 - 周杰伦</li>
+                <li data-src="music/周杰伦 - 爱你没差.mp3">周杰伦 - 爱你没差</li>
+                <li data-src="music/周杰伦 - 爱情悬崖.mp3">周杰伦 - 爱情悬崖</li>
+                <li data-src="music/周杰伦 - 本草纲目.mp3">周杰伦 - 本草纲目</li>
+                <li data-src="music/周杰伦 - 不能说的秘密(正式EP版).mp3">周杰伦 - 不能说的秘密(正式EP版)</li>
+                <li data-src="music/周杰伦 - 刀马旦.mp3">周杰伦 - 刀马旦</li>
+                <li data-src="music/周杰伦 - 稻香.mp3">周杰伦 - 稻香</li>
+                <li data-src="music/周杰伦 - 东风破.mp3">周杰伦 - 东风破</li>
+                <li data-src="music/周杰伦 - 断了的弦(寻找周杰伦插曲).mp3">周杰伦 - 断了的弦(寻找周杰伦插曲)</li>
+                <li data-src="music/周杰伦 - 二手烟.mp3">周杰伦 - 二手烟</li>
+                <li data-src="music/周杰伦 - 发如雪.mp3">周杰伦 - 发如雪</li>
+                <li data-src="music/周杰伦 - 反方向的钟.mp3">周杰伦 - 反方向的钟</li>
+                <li data-src="music/周杰伦 - 枫.mp3">周杰伦 - 枫</li>
+                <li data-src="music/周杰伦 - 搁浅.mp3">周杰伦 - 搁浅</li>
+                <li data-src="music/周杰伦 - 给我一首歌的时间.mp3">周杰伦 - 给我一首歌的时间</li>
+                <li data-src="music/周杰伦 - 公公偏头痛.mp3">周杰伦 - 公公偏头痛</li>
+                <li data-src="music/周杰伦 - 公主病.mp3">周杰伦 - 公主病</li>
+                <li data-src="music/周杰伦 - 轨迹.mp3">周杰伦 - 轨迹</li>
+                <li data-src="music/周杰伦 - 好久不见.mp3">周杰伦 - 好久不见</li>
+                <li data-src="music/周杰伦 - 红尘客栈.mp3">周杰伦 - 红尘客栈</li>
+                <li data-src="music/周杰伦 - 花海.mp3">周杰伦 - 花海</li>
+                <li data-src="music/周杰伦 - 黄金甲EP.mp3">周杰伦 - 黄金甲EP</li>
+                <li data-src="music/周杰伦 - 霍元甲(霍元甲 电影主题曲).mp3">周杰伦 - 霍元甲(霍元甲 电影主题曲)</li>
+                <li data-src="music/周杰伦 - 借口.mp3">周杰伦 - 借口</li>
+                <li data-src="music/周杰伦 - 惊叹号.mp3">周杰伦 - 惊叹号</li>
+                <li data-src="music/周杰伦 - 菊花台(《满城尽带黄金甲》片尾曲).mp3">周杰伦 - 菊花台(《满城尽带黄金甲》片尾曲)</li>
+                <li data-src="music/周杰伦 - 可爱女人.mp3">周杰伦 - 可爱女人</li>
+                <li data-src="music/周杰伦 - 跨时代.mp3">周杰伦 - 跨时代</li>
+                <li data-src="music/周杰伦 - 兰亭序.mp3">周杰伦 - 兰亭序</li>
+                <li data-src="music/周杰伦 - 蓝色风暴.mp3">周杰伦 - 蓝色风暴</li>
+                <li data-src="music/周杰伦 - 浪漫手机.mp3">周杰伦 - 浪漫手机</li>
+                <li data-src="music/周杰伦 - 疗伤烧肉粽.mp3">周杰伦 - 疗伤烧肉粽</li>
+                <li data-src="music/周杰伦 - 流浪诗人.mp3">周杰伦 - 流浪诗人</li>
+                <li data-src="music/周杰伦 - 龙卷风.mp3">周杰伦 - 龙卷风</li>
+                <li data-src="music/周杰伦 - 明明就.mp3">周杰伦 - 明明就</li>
+                <li data-src="music/周杰伦 - 哪里都是你.mp3">周杰伦 - 哪里都是你</li>
+                <li data-src="music/周杰伦 - 蒲公英的约定.mp3">周杰伦 - 蒲公英的约定</li>
+                <li data-src="music/周杰伦 - 七里香.mp3">周杰伦 - 七里香</li>
+                <li data-src="music/周杰伦 - 青花瓷.mp3">周杰伦 - 青花瓷</li>
+                <li data-src="music/周杰伦 - 晴天.mp3">周杰伦 - 晴天</li>
+                <li data-src="music/周杰伦 - 说好的幸福呢.mp3">周杰伦 - 说好的幸福呢</li>
+                <li data-src="music/周杰伦 - 甜甜的.mp3">周杰伦 - 甜甜的</li>
+                <li data-src="music/周杰伦 - 听妈妈的话.mp3">周杰伦 - 听妈妈的话</li>
+                <li data-src="music/周杰伦 - 退后.mp3">周杰伦 - 退后</li>
+                <li data-src="music/周杰伦 - 我不配.mp3">周杰伦 - 我不配</li>
+                <li data-src="music/周杰伦 - 我落泪情绪零碎.mp3">周杰伦 - 我落泪情绪零碎</li>
+                <li data-src="music/周杰伦 - 星晴.mp3">周杰伦 - 星晴</li>
+                <li data-src="music/周杰伦 - 夜的第七章.mp3">周杰伦 - 夜的第七章</li>
+                <li data-src="music/周杰伦 - 夜曲.mp3">周杰伦 - 夜曲</li>
+                <li data-src="music/周杰伦 - 一路向北(头文字D 电影插曲).mp3">周杰伦 - 一路向北(头文字D 电影插曲)</li>
+                <li data-src="music/周杰伦 - 以父之名.mp3">周杰伦 - 以父之名</li>
+                <li data-src="music/周杰伦 - 雨下一整晚.mp3">周杰伦 - 雨下一整晚</li>
+                <li data-src="music/周杰伦 - 园游会.mp3">周杰伦 - 园游会</li>
+                <li data-src="music/周杰伦 - 止战之殇.mp3">周杰伦 - 止战之殇</li>
+                <li data-src="music/周杰伦 - 最长的电影.mp3">周杰伦 - 最长的电影</li>
+            </ul>
+        </div>
     </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const playlistItems = document.querySelectorAll('.playlist li');
+        const togglePlaylistBtn = document.getElementById('togglePlaylistBtn');
+        const playlist = document.getElementById('playlist');
+        const exitPlaylistBtn = document.getElementById('exitPlaylistBtn');
+        const sources = [
+            'music/简单爱 - 周杰伦.mp3',
+            'music/手写的从前 - 周杰伦.mp3',
+            'music/周杰伦 - 爱你没差.mp3',
+            'music/周杰伦 - 爱情悬崖.mp3',
+            'music/周杰伦 - 本草纲目.mp3',
+            'music/周杰伦 - 不能说的秘密(正式EP版).mp3',
+            'music/周杰伦 - 刀马旦.mp3',
+            'music/周杰伦 - 稻香.mp3',
+            'music/周杰伦 - 东风破.mp3',
+            'music/周杰伦 - 断了的弦(寻找周杰伦插曲).mp3',
+            'music/周杰伦 - 二手烟.mp3',
+            'music/周杰伦 - 发如雪.mp3',
+            'music/周杰伦 - 反方向的钟.mp3',
+            'music/周杰伦 - 枫.mp3',
+            'music/周杰伦 - 搁浅.mp3',
+            'music/周杰伦 - 给我一首歌的时间.mp3',
+            'music/周杰伦 - 公公偏头痛.mp3',
+            'music/周杰伦 - 公主病.mp3',
+            'music/周杰伦 - 轨迹.mp3',
+            'music/周杰伦 - 好久不见.mp3',
+            'music/周杰伦 - 红尘客栈.mp3',
+            'music/周杰伦 - 花海.mp3',
+            'music/周杰伦 - 黄金甲EP.mp3',
+            'music/周杰伦 - 霍元甲(霍元甲 电影主题曲).mp3',
+            'music/周杰伦 - 借口.mp3',
+            'music/周杰伦 - 惊叹号.mp3',
+            'music/周杰伦 - 菊花台(《满城尽带黄金甲》片尾曲).mp3',
+            'music/周杰伦 - 可爱女人.mp3',
+            'music/周杰伦 - 跨时代.mp3',
+            'music/周杰伦 - 兰亭序.mp3',
+            'music/周杰伦 - 蓝色风暴.mp3',
+            'music/周杰伦 - 浪漫手机.mp3',
+            'music/周杰伦 - 疗伤烧肉粽.mp3',
+            'music/周杰伦 - 流浪诗人.mp3',
+            'music/周杰伦 - 龙卷风.mp3',
+            'music/周杰伦 - 明明就.mp3',
+            'music/周杰伦 - 哪里都是你.mp3',
+            'music/周杰伦 - 蒲公英的约定.mp3',
+            'music/周杰伦 - 七里香.mp3',
+            'music/周杰伦 - 青花瓷.mp3',
+            'music/周杰伦 - 晴天.mp3',
+            'music/周杰伦 - 说好的幸福呢.mp3',
+            'music/周杰伦 - 甜甜的.mp3',
+            'music/周杰伦 - 听妈妈的话.mp3',
+            'music/周杰伦 - 退后.mp3',
+            'music/周杰伦 - 我不配.mp3',
+            'music/周杰伦 - 我落泪情绪零碎.mp3',
+            'music/周杰伦 - 星晴.mp3',
+            'music/周杰伦 - 夜的第七章.mp3',
+            'music/周杰伦 - 夜曲.mp3',
+            'music/周杰伦 - 一路向北(头文字D 电影插曲).mp3',
+            'music/周杰伦 - 以父之名.mp3',
+            'music/周杰伦 - 雨下一整晚.mp3',
+            'music/周杰伦 - 园游会.mp3',
+            'music/周杰伦 - 止战之殇.mp3',
+            'music/周杰伦 - 最长的电影.mp3'
+        ];
+        let currentTrack = 0;
+
+        playBtn.addEventListener('click', () => {
+            audioPlayer.play();
+        });
+
+        pauseBtn.addEventListener('click', () => {
+            audioPlayer.pause();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            playNextTrack();
+        });
+
+        playlistItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const src = item.getAttribute('data-src');
+                audioPlayer.src = src;
+                audioPlayer.play();
+            });
+        });
+
+        togglePlaylistBtn.addEventListener('click', () => {
+            if (playlist.style.display === 'none' || playlist.style.display === '') {
+                playlist.style.display = 'block';
+                togglePlaylistBtn.textContent = '隐藏播放列表';
+            } else {
+                playlist.style.display = 'none';
+                togglePlaylistBtn.textContent = '显示播放列表';
+            }
+        });
+
+        exitPlaylistBtn.addEventListener('click', () => {
+            playlist.style.display = 'none';
+            togglePlaylistBtn.textContent = '显示播放列表';
+        });
+
+        audioPlayer.addEventListener('ended', () => {
+            playNextTrack();
+        });
+
+        function playNextTrack() {
+            currentTrack = (currentTrack + 1) % sources.length;
+            audioPlayer.src = sources[currentTrack];
+            audioPlayer.play();
+        }
+    </script>
 </body>
 </html>
